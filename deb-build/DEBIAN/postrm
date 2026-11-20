@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ "$1" = "remove" ] || [ "$1" = "purge" ]; then
+    rm -f /usr/local/bin/smart-file-manager
+    rm -f /usr/share/applications/smart-file-manager.desktop
+
+    for HOME_DIR in /home/*; do
+        [ -d "$HOME_DIR" ] || continue
+
+        DEST="$HOME_DIR/.local/share/nautilus/scripts/Arrange Files"
+        MARKER="$HOME_DIR/.local/share/nautilus/scripts/.smart-file-manager-arrange-files-installed"
+
+        if [ -f "$MARKER" ]; then
+            rm -f "$DEST" "$MARKER"
+        fi
+    done
+
+    rm -rf /usr/local/share/smart-file-manager
+fi
+
+exit 0

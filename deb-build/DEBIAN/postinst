@@ -1,0 +1,46 @@
+#!/bin/bash
+set -e
+
+mkdir -p /usr/local/bin /usr/share/applications
+
+cat > /usr/local/bin/smart-file-manager <<'LAUNCHER'
+#!/bin/bash
+exec /opt/smart-file-manager/main "$@"
+LAUNCHER
+chmod 755 /usr/local/bin/smart-file-manager
+
+cat > /usr/share/applications/smart-file-manager.desktop <<'DESKTOP'
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Smart File Manager
+Comment=Smart file organization for Ubuntu
+Exec=/usr/local/bin/smart-file-manager
+Icon=system-file-manager
+Terminal=false
+Categories=Utility;FileManager;
+DESKTOP
+chmod 644 /usr/share/applications/smart-file-manager.desktop
+
+SOURCE="/usr/share/nautilus/scripts/Arrange Files"
+
+if [ -f "$SOURCE" ]; then
+    for HOME_DIR in /home/*; do
+        [ -d "$HOME_DIR" ] || continue
+
+        DEST="$HOME_DIR/.local/share/nautilus/scripts/Arrange Files"
+        MARKER="$HOME_DIR/.local/share/nautilus/scripts/.smart-file-manager-arrange-files-installed"
+
+        mkdir -p "$(dirname "$DEST")"
+
+        if [ ! -e "$DEST" ]; then
+            cp "$SOURCE" "$DEST"
+            chmod 755 "$DEST"
+            chown "$(stat -c '%u:%g' "$HOME_DIR")" "$DEST"
+            touch "$MARKER"
+            chown "$(stat -c '%u:%g' "$HOME_DIR")" "$MARKER"
+        fi
+    done
+fi
+
+exit 0

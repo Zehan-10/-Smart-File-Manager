@@ -1,0 +1,9 @@
+Package: smart-file-manager
+Version: 1.0.1
+Section: utils
+Priority: optional
+Architecture: amd64
+Maintainer: Emon
+Description: Smart File Manager for Ubuntu Linux
+ A graphical file manager with smart file organization
+ and Nautilus right-click integration.

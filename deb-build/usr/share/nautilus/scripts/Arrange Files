@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ "$#" -eq 0 ]; then
+    notify-send "Smart File Manager" "Please select one or more files first."
+    exit 0
+fi
+
+/usr/bin/python3 /opt/smart-file-manager/arrange.py "$@"

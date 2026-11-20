@@ -1,0 +1,57 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+venv-*/
+.env
+.venv/
+
+# Build files
+build/
+dist/
+*.spec.bak
+
+# Backup files
+*.backup
+*.backup-*
+*.bak
+*.before*
+*.old
+*_backup.py
+
+# Test folders
+duplicate_test/
+duplicate_test2/
+password_test/
+password_inplace_test/
+test_files/
+test_mixed/
+zip_test/
+
+# Database and personal data
+*.db
+*.sqlite
+*.sqlite3
+*.env
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Additional backup and old files
+*-backup*
+*.inplace-backup
+*.backup*
+*_before_*.py
+
+# Temporary video
+video5.webm
